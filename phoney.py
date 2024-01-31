@@ -8,8 +8,11 @@ def clean_phone_numbers(numbers):
             clenaed_number = re.sub(r'\D', '', i)
             # print(f"Removed Specials: {clenaed_number}") test cases
             if len(clenaed_number) == 10:
-                clean_list.append(clenaed_number)
-                # print(f"Cleaned: {clenaed_number}") test cases
+                if clenaed_number[:1] != 0 or 1: # filters out the first number if it has 0 or 1
+                    if clenaed_number[3:4] != 0 or 1: # filters out the number in the 4th index if it has 0 or 1
+                        if clenaed_number[3:5] != 555: # filters out the exchange code CDD (ABB-CDD-ZZZZ) if it has 555
+                            clean_list.append(clenaed_number)
+                            # print(f"Cleaned: {clenaed_number}") test cases
     return clean_list
 
 def find_number(numbers, search_term):
